@@ -4,6 +4,56 @@
 # Used to running Test Cases against the parse-php-sdk
 #
 
+############
+## Config ##
+############
+
+# app name
+APP_NAME="MyTestApp"
+
+# application id
+APP_ID="app-id-here"
+
+# master key
+MASTER_KEY="master-key-here"
+
+# mongodb database uri
+DATABASE_URI="mongodb://localhost/test"
+
+# location of cloud code file (this location)
+CLOUD_CODE_FILE="`pwd`/cloud-code.js"
+
+# parse push configuration (mock and android only)
+PUSH_CONFIG='{"android":{"senderId":"blank-sender-id","apiKey":"not-a-real-api-key"}}'
+
+# email adapter configuration, default is mailgun with nonfunctional keys
+EMAIL_ADAPTER_CONFIG='{"module":"parse-server-simple-mailgun-adapter","options":{"apiKey":"not-a-real-api-key","domain":"example.com","fromAddress":"example@example.com"}}'
+
+# parse server publicly accessible url
+PUBLIC_URL="http://localhost:1337/parse"
+
+
+
+
+# Verify npm is installed
+if hash npm 2>/dev/null;
+then
+    # indicate we found npm
+    echo "* Found npm"
+
+else
+    # not installed, inform the user they must install before continuing
+    echo ""
+    echo "!! npm is not installed !!"
+    echo "Please install npm and try again."
+    echo ""
+    echo "(how to install npm)"
+    echo "http://blog.npmjs.org/post/85484771375/how-to-install-npm"
+    echo ""
+    exit 1
+
+fi
+
 # Verify parse-server is installed
 hasServer=`npm -g list | grep parse-server@`
 if [ "$hasServer" = "" ];
@@ -14,17 +64,6 @@ then
 else
     echo "* Found parse-server"
 fi
-
-# Verify mongodb is installed
-#hasMongo=`npm -g list | grep mongodb@`
-#if [ "$hasMongo" = "" ];
-#then
-#    echo "Installing mongodb..."
-#    npm install -g mongodb
-#
-#else
-#    echo "* Found mongodb"
-#fi
 
 # Verify mongo-runner is installed
 hasMongoRunner=`npm -g list | grep mongodb-runner@`
@@ -47,20 +86,20 @@ mongodb-runner start
 echo ""
 echo ""
 
-# Set environment variables
-#VERBOSE='1'
-
 # Start ParseServer from the command line, not we are using cloud code as well
 parse-server\
-    --appName MyTestApp\
-    --appId app-id-here\
-    --masterKey master-key-here\
-    --databaseURI mongodb://localhost/test\
-    --cloud `pwd`/cloud-code.js\
-    --push '{"android":{"senderId":"blank-sender-id","apiKey":"some-api-key"}}'\
-    --emailAdapter '{"module":"parse-server-simple-mailgun-adapter","options":{"apiKey":"arbitrary-api-key","domain":"example.com","fromAddress":"example@example.com"}}'\
-    --publicServerURL http://localhost:1337/parse\
+    --appName $APP_NAME\
+    --appId $APP_ID\
+    --masterKey $MASTER_KEY\
+    --databaseURI $DATABASE_URI\
+    --cloud $CLOUD_CODE_FILE\
+    --push $PUSH_CONFIG\
+    --emailAdapter $EMAIL_ADAPTER_CONFIG\
+    --publicServerURL $PUBLIC_URL\
 
+echo ""
+echo "...shutting down..."
+echo ""
 
 # Stop MongoDB
 mongodb-runner stop
