@@ -18,7 +18,7 @@ You can clone down this project and run ```npm install``` to set everything up. 
 You can then run ```npm start```. This will:
 1. Check for updates from parse-server
 2. Setup a mongodb instance for testing
-3. Start a parse-server instance and log to last.log
+3. Start a parse-server instance
 
 Hitting Ctrl-C will shut down the server and your mongodb instance all in one go. If you manage to skip the mongodb shutdown you can always run ```npm stop``` to ensure it's taken care of.
 
