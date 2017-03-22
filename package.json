@@ -1,0 +1,31 @@
+{
+  "name": "parse-server-test",
+  "version": "1.0.0",
+  "description": "Setups parse-server, in an easy fashion. Used for running Test Cases against the parse sdks.",
+  "main": "parse-server-test",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "./run-server",
+    "stop"  : "mongodb-runner stop"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/montymxb/parse-server-test.git"
+  },
+  "keywords": [
+    "parse",
+    "mongodb",
+    "test",
+    "server"
+  ],
+  "author": "montymxb",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/montymxb/parse-server-test/issues"
+  },
+  "homepage": "https://github.com/montymxb/parse-server-test#readme",
+  "dependencies": {
+    "mongodb-runner": "^3.4.0",
+    "parse-server": "*"
+  }
+}
