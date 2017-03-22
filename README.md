@@ -20,7 +20,7 @@ You can then run ```npm start```. This will:
 2. Setup a mongodb instance for testing
 3. Start a parse-server instance and log to last.log
 
-Hitting Ctrl-C will shut down the server and your mongodb instance all in one go. If you manage to skip the mongodb shutdown you can always run ``npm stop``` to ensure it's taken care of.
+Hitting Ctrl-C will shut down the server and your mongodb instance all in one go. If you manage to skip the mongodb shutdown you can always run ```npm stop``` to ensure it's taken care of.
 
 You can also call ```run-server``` directly from the project directory to start everything up.
 ```bash
