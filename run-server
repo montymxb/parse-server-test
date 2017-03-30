@@ -32,6 +32,9 @@ EMAIL_ADAPTER_CONFIG='{"module":"parse-server-simple-mailgun-adapter","options":
 # parse server publicly accessible url
 PUBLIC_URL="http://localhost:1337/parse"
 
+# auth data
+AUTH_DATA='{"twitter":{"consumer_key":"not_a_real_consumer_key","consumer_secret":"not_a_real_consumer_secret"},"facebook":{"appIds":"not_a_real_facebook_app_id"}}'
+
 
 # check to update our dependencies before we begin
 npm update
@@ -54,6 +57,7 @@ parse-server\
     --push $PUSH_CONFIG\
     --emailAdapter $EMAIL_ADAPTER_CONFIG\
     --publicServerURL $PUBLIC_URL\
+    --auth $AUTH_DATA\
     #--verbose
 
 echo "
