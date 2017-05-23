@@ -1,0 +1,13 @@
+{
+  "name": "parse-server-test",
+  "description": "Testable Parse Server",
+  "keywords": ["parse", "server", "testing"],
+  "homepage": "https://github.com/montymxb/parse-server-test",
+  "license": "ISC",
+  "authors": [
+    {
+      "name": "montymxb",
+      "homepage": "https://github.com/montymxb"
+    }
+  ]
+}

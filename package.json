@@ -1,7 +1,7 @@
 {
-  "name": "parse-server-test",
-  "version": "1.0.0",
-  "description": "Setups parse-server, in an easy fashion. Used for running Test Cases against the parse sdks.",
+  "name": "montymxb/parse-server-test",
+  "version": "1.0.1",
+  "description": "Testable Parse Server",
   "main": "parse-server-test",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
