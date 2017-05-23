@@ -1,7 +1,6 @@
 # parse-server-test
 Lightwight ParseServer Implementation for Testing
 
-
 ### What is this?
 An easy way to deploy mongodb and parse-server for testing purposes.
 This is setup with the intention for testing the [Parse PHP SDK](https://github.com/ParsePlatform/parse-php-sdk/), but, being a fully fledged instance of parse server, would work just as well with any of the other Parse sdks.
