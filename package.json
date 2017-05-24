@@ -1,7 +1,7 @@
 {
-  "name": "montymxb/parse-server-test",
+  "name": "parse-server-test",
   "version": "1.0.1",
-  "description": "Testable Parse Server",
+  "description": "Testable Parse Server. Lightweight instance for running tests against the Parse PHP SDK and any other parse sdks.",
   "main": "parse-server-test",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
