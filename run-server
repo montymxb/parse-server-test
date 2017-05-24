@@ -21,7 +21,8 @@ MASTER_KEY="master-key-here"
 DATABASE_URI="mongodb://localhost/test"
 
 # location of cloud code file (this location)
-CLOUD_CODE_FILE="`pwd`/cloud-code.js"
+#CLOUD_CODE_FILE="`pwd`/cloud-code.js"
+CLOUD_CODE_FILE="`dirname $0`/cloud-code.js"
 
 # parse push configuration (mock and android only)
 PUSH_CONFIG='{"android":{"senderId":"blank-sender-id","apiKey":"not-a-real-api-key"}}'
