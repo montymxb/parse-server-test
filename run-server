@@ -36,10 +36,11 @@ PUBLIC_URL="http://localhost:1337/parse"
 # auth data
 AUTH_DATA='{"twitter":{"consumer_key":"not_a_real_consumer_key","consumer_secret":"not_a_real_consumer_secret"},"facebook":{"appIds":"not_a_real_facebook_app_id"}}'
 
+# live query setup
+LIVE_QUERY_CLASS_NAME='TestObject,User,_User';
 
 # check to update our dependencies before we begin
 npm update
-
 
 # Start MongoDB
 mongodb-runner start
@@ -59,6 +60,8 @@ parse-server\
     --emailAdapter $EMAIL_ADAPTER_CONFIG\
     --publicServerURL $PUBLIC_URL\
     --auth $AUTH_DATA\
+    --liveQuery.classNames $LIVE_QUERY_CLASS_NAME\
+    --startLiveQueryServer true\
     #--verbose
 
 echo "
