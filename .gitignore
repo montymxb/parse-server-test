@@ -1,3 +1,9 @@
 .idea
 logs
 node_modules/
+
+# ignore logs
+*.log
+
+# ignore pid file
+pid.txt

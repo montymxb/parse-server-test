@@ -49,6 +49,16 @@ mongodb-runner start
 echo "
 "
 
+function writePID() {
+    PID=`echo $!`
+    echo "$PID" > "`dirname $0`/pid.txt"
+
+}
+
+# generated log file for this test instance, does NOT rotate
+LOG_FILE="parse-server-`date '+%m-%d-%Y'`.log"
+LOG_PATH="`dirname $0`/"
+
 # Start ParseServer from the command line, note we are using cloud code as well
 parse-server\
     --appName $APP_NAME\
@@ -62,17 +72,21 @@ parse-server\
     --auth $AUTH_DATA\
     --liveQuery.classNames $LIVE_QUERY_CLASS_NAME\
     --startLiveQueryServer true\
+    > "$LOG_PATH$LOG_FILE"\
+    & writePID &
     #--verbose
 
-echo "
-...shutting down...
-"
+# loop until the PID is written out
+PID=$(<"`dirname $0`/pid.txt")
+while [ "$PID" = "" ];
+do
+    sleep 2
+    PID=$(<"`dirname $0`/pid.txt")
+done
 
-# Stop MongoDB
-mongodb-runner stop
-
 echo "
-Done!
+[Parse Server Started with PID $PID]
+Logging to $LOG_FILE
 "
 
 exit 0

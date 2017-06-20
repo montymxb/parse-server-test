@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+PID=$(<"`dirname $0`/pid.txt")
+
+if [ "$PID" = "" ];
+then
+    echo "
+No running parse-server instance to stop
+"
+    exit 0
+fi
+
+# kill the server using our PID
+kill -3 "$PID"
+
+echo "
+server stopped
+"
+
+# clear pid
+echo "" > "`dirname $0`/pid.txt"

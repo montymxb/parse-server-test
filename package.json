@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "./run-server",
-    "stop": "mongodb-runner stop"
+    "stop": "./stop-server;mongodb-runner stop"
   },
   "repository": {
     "type": "git",
