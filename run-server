@@ -39,7 +39,9 @@ AUTH_DATA='{"twitter":{"consumer_key":"not_a_real_consumer_key","consumer_secret
 # live query setup
 LIVE_QUERY_CLASS_NAME='TestObject,User,_User';
 
-
+################
+## End Config ##
+################
 
 # Verify we are not already running
 if [ -f "`dirname $0`/pid.txt" ];
@@ -58,9 +60,6 @@ Run 'npm stop' first to shut it down.
     fi
 
 fi
-
-# check to update our dependencies before we begin
-npm update
 
 # Start MongoDB
 mongodb-runner start
