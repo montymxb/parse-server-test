@@ -14,8 +14,11 @@ fi
 kill -3 "$PID"
 
 echo "
-server stopped
+parse-server stopped
 "
 
 # clear pid
 echo "" > "`dirname $0`/pid.txt"
+
+# stop the runner
+mongodb-runner stop

@@ -92,6 +92,15 @@ function writePID {
 
     done
 
+    # Verify we could start
+    if [ "$OUTPUT" = "Unable to listen on port 1337. The port is already in use." ];
+    then
+        # unable to listen, write out an empty PID
+        echo "" > "`dirname $0`/pid.txt"
+        return
+
+    fi
+
     # setup regex
     GREP_REGEX="\[[0-9]+\] parse-server running"
 
@@ -116,7 +125,7 @@ function writePID {
     # split on pipes to get our PID
     PID=`echo $PID | cut -d '|' -f 2`
 
-    #PID=`echo $!`
+    # write out our PID
     echo "$PID" > "`dirname $0`/pid.txt"
 
 }
@@ -149,6 +158,22 @@ PID=$(<"`dirname $0`/pid.txt")
 while [ "$PID" = "" ];
 do
     sleep 2
+
+    # verify our log file
+    OUTPUT=$(<"$LOG_PATH$LOG_FILE")
+    if [ "$OUTPUT" = "Unable to listen on port 1337. The port is already in use." ];
+    then
+        # unable to listen, write out an empty PID
+        echo "
+Unable to start Parse Server on port 1337. The port is already in use.
+"
+        # shut down mongodb-runner
+        mongodb-runner stop
+
+        exit 0
+
+    fi
+
     PID=$(<"`dirname $0`/pid.txt")
 done
 
