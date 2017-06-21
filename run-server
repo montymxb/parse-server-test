@@ -39,6 +39,26 @@ AUTH_DATA='{"twitter":{"consumer_key":"not_a_real_consumer_key","consumer_secret
 # live query setup
 LIVE_QUERY_CLASS_NAME='TestObject,User,_User';
 
+
+
+# Verify we are not already running
+if [ -f "`dirname $0`/pid.txt" ];
+then
+    PID=$(<"`dirname $0`/pid.txt")
+    if [ ! "$PID" = "" ];
+    then
+        # server already running
+        echo "
+parse-server appears to be already running under process [$PID]
+
+Run 'npm stop' first to shut it down.
+"
+        exit 0
+
+    fi
+
+fi
+
 # check to update our dependencies before we begin
 npm update
 
@@ -49,15 +69,57 @@ mongodb-runner start
 echo "
 "
 
-function writePID() {
-    PID=`echo $!`
-    echo "$PID" > "`dirname $0`/pid.txt"
-
-}
-
 # generated log file for this test instance, does NOT rotate
 LOG_FILE="parse-server-`date '+%m-%d-%Y'`.log"
 LOG_PATH="`dirname $0`/"
+
+# Writes the server PID out once finished starting up
+function writePID {
+
+    # wait until the log file is created
+    while [ ! -f "$1" ];
+    do
+        sleep 1
+
+    done
+
+    # wait for parse to start logging
+    OUTPUT=$(<"$1")
+    while [ "$OUTPUT" = "" ];
+    do
+        sleep 1
+        OUTPUT=$(<"$1")
+
+    done
+
+    # setup regex
+    GREP_REGEX="\[[0-9]+\] parse-server running"
+
+    # get line in question containing our PID
+    PID=`cat "$1" | egrep "$GREP_REGEX"`
+
+    # wait for our server running line to load up
+    while [ "$PID" = "" ];
+    do
+        sleep 1
+        PID=`cat "$1" | egrep "$GREP_REGEX"`
+
+    done
+
+    # Pull out just the first part, containing the PID
+    PID=($PID)
+
+    # convert [] to pipes
+    PID=$(echo "$PID"|tr -d "[\`|")
+    PID=$(echo "$PID"|tr -d "]\`|")
+
+    # split on pipes to get our PID
+    PID=`echo $PID | cut -d '|' -f 2`
+
+    #PID=`echo $!`
+    echo "$PID" > "`dirname $0`/pid.txt"
+
+}
 
 # Start ParseServer from the command line, note we are using cloud code as well
 parse-server\
@@ -72,9 +134,8 @@ parse-server\
     --auth $AUTH_DATA\
     --liveQuery.classNames $LIVE_QUERY_CLASS_NAME\
     --startLiveQueryServer true\
-    > "$LOG_PATH$LOG_FILE"\
-    & writePID &
-    #--verbose
+    > "$LOG_PATH$LOG_FILE" 2>&1\
+    & writePID "$LOG_PATH$LOG_FILE" &
 
 # loop until the PID is written out
 PID=$(<"`dirname $0`/pid.txt")
