@@ -137,6 +137,14 @@ parse-server\
     > "$LOG_PATH$LOG_FILE" 2>&1\
     & writePID "$LOG_PATH$LOG_FILE" &
 
+# loop until the pid exists
+while [ ! -f "`dirname $0`/pid.txt" ];
+do
+    echo "no pid found..."
+    sleep 1
+
+done
+
 # loop until the PID is written out
 PID=$(<"`dirname $0`/pid.txt")
 while [ "$PID" = "" ];
