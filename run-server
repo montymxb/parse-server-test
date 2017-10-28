@@ -4,45 +4,6 @@
 # Used for running Test Cases against the parse-php-sdk
 #
 
-############
-## Config ##
-############
-
-# app name
-APP_NAME="MyTestApp"
-
-# application id
-APP_ID="app-id-here"
-
-# master key
-MASTER_KEY="master-key-here"
-
-# mongodb database uri
-DATABASE_URI="mongodb://localhost/test"
-
-# location of cloud code file (this location)
-#CLOUD_CODE_FILE="`pwd`/cloud-code.js"
-CLOUD_CODE_FILE="`dirname $0`/cloud-code.js"
-
-# parse push configuration (mock and android only)
-PUSH_CONFIG='{"android":{"senderId":"blank-sender-id","apiKey":"not-a-real-api-key"}}'
-
-# email adapter configuration, default is mailgun with nonfunctional keys
-EMAIL_ADAPTER_CONFIG='{"module":"parse-server-simple-mailgun-adapter","options":{"apiKey":"not-a-real-api-key","domain":"example.com","fromAddress":"example@example.com"}}'
-
-# parse server publicly accessible url
-PUBLIC_URL="http://localhost:1337/parse"
-
-# auth data
-AUTH_DATA='{"twitter":{"consumer_key":"not_a_real_consumer_key","consumer_secret":"not_a_real_consumer_secret"},"facebook":{"appIds":"not_a_real_facebook_app_id"}}'
-
-# live query setup
-LIVE_QUERY_CLASS_NAME='TestObject,User,_User';
-
-################
-## End Config ##
-################
-
 # Verify we are not already running
 if [ -f "`dirname $0`/pid.txt" ];
 then
@@ -60,6 +21,8 @@ Run 'npm stop' first to shut it down.
     fi
 
 fi
+
+echo "* starting mongodb"
 
 # Start MongoDB
 mongodb-runner start
@@ -129,21 +92,10 @@ function writePID {
 
 }
 
+echo "* starting parse-server"
+
 # Start ParseServer from the command line, note we are using cloud code as well
-parse-server\
-    --appName $APP_NAME\
-    --appId $APP_ID\
-    --masterKey $MASTER_KEY\
-    --databaseURI $DATABASE_URI\
-    --cloud $CLOUD_CODE_FILE\
-    --push $PUSH_CONFIG\
-    --emailAdapter $EMAIL_ADAPTER_CONFIG\
-    --publicServerURL $PUBLIC_URL\
-    --auth $AUTH_DATA\
-    --liveQuery.classNames $LIVE_QUERY_CLASS_NAME\
-    --startLiveQueryServer true\
-    > "$LOG_PATH$LOG_FILE" 2>&1\
-    & writePID "$LOG_PATH$LOG_FILE" &
+parse-server config.json --startLiveQueryServer true > "$LOG_PATH$LOG_FILE" 2>&1 & writePID "$LOG_PATH$LOG_FILE" &
 
 # loop until the pid exists
 while [ ! -f "`dirname $0`/pid.txt" ];
