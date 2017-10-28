@@ -1,6 +1,6 @@
 {
   "name": "parse-server-test",
-  "version": "1.1.5",
+  "version": "1.2.0",
   "description": "Testable Parse Server. Lightweight instance for running tests against the Parse PHP SDK and any other parse sdks.",
   "main": "parse-server-test",
   "scripts": {
