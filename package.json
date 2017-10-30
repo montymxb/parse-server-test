@@ -6,9 +6,12 @@
   "scripts": {
     "test": "echo \"Error: No Tests Specified\" && exit 1",
     "prestart": "mongodb-runner start",
-    "start": "forever start index.js",
-    "stop": "forever stop index.js",
+    "start": "forever start ./bin/parse-server-test",
+    "stop": "forever stop ./bin/parse-server-test",
     "poststop": "mongodb-runner stop"
+  },
+  "bin": {
+    "parse-server-test": "./bin/parse-server-test"
   },
   "repository": {
     "type": "git",
