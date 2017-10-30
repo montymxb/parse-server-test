@@ -4,9 +4,14 @@
   "description": "Testable Parse Server. Lightweight instance for running tests against the Parse PHP SDK and any other parse sdks.",
   "main": "parse-server-test",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./run-server",
-    "stop": "./stop-server"
+    "test": "echo \"Error: No Tests Specified\" && exit 1",
+
+    "prestart": "mongodb-runner start",
+    "start": "forever start index.js",
+
+    "stop": "forever stop index.js",
+    "poststop": "mongodb-runner stop"
+
   },
   "repository": {
     "type": "git",
@@ -25,7 +30,8 @@
   },
   "homepage": "https://github.com/montymxb/parse-server-test#readme",
   "dependencies": {
-    "mongodb-runner": "^3.4.0",
-    "parse-server": "parse-community/parse-server.git#latest"
+    "forever": "^0.15.3",
+    "mongodb-runner": "^3.6.1",
+    "parse-server": "github:parse-community/parse-server#latest"
   }
 }
