@@ -10,9 +10,6 @@
     "stop": "forever stop ./server.js",
     "poststop": "mongodb-runner stop"
   },
-  "bin": {
-    "parse-server-test": "./bin/parse-server-test"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/montymxb/parse-server-test.git"
