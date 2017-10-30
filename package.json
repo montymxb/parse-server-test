@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: No Tests Specified\" && exit 1",
     "prestart": "mongodb-runner start",
-    "start": "forever start ./bin/parse-server-test",
-    "stop": "forever stop ./bin/parse-server-test",
+    "start": "forever start ./server.js",
+    "stop": "forever stop ./server.js",
     "poststop": "mongodb-runner stop"
   },
   "bin": {
@@ -32,6 +32,7 @@
   "dependencies": {
     "forever": "^0.15.3",
     "mongodb-runner": "^3.6.1",
-    "parse-server": "github:parse-community/parse-server#latest"
+    "parse-server": "github:parse-community/parse-server#latest",
+    "winston": "^2.4.0"
   }
 }
