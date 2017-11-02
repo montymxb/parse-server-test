@@ -14,24 +14,20 @@ If you don't already have npm installed you can <a href="http://blog.npmjs.org/p
 ### How to Get Started.
 You can clone down this project and run ```npm install``` to set everything up. Npm installations are done locally to keep things nice and tidy.
 
-You can then run ```npm start```. This will:
-1. Check for updates from parse-server
-2. Setup a mongodb instance for testing
-3. Start a parse-server instance
+You can then run ```npm start```. This will run an instance of `forever`, which will monitor the server setup in `server.js`.
+Running via forever detaches the process so you don't have to worry about tying up your terminal session.
 
-Hitting Ctrl-C will shut down the server and your mongodb instance all in one go. If you manage to skip the mongodb shutdown you can always run ```npm stop``` to ensure it's taken care of.
+The server will continue to run until a subsequent `npm stop` command is run. This will, via `forever`, shutdown the server and close up the test instance of mongodb.
 
-You can also call ```run-server``` directly from the project directory to start everything up.
-```bash
-./run-server
+You can also call ```node server.js``` directly from the project directory to start everything up, in case you want to get direct output directly to the console rather than the logs.
+
+If you want to customize your test server you need only edit the configuration in `server.js`, the bit that's passed in to create a new instance of `ParseServer`.
+You can find more details about configuring your parse-server [here]()https://github.com/parse-community/parse-server/#configuration.
+
+Verbose output is enabled by default to help with testing. If you need to make it a bit quieter you can remove the following line from the config in `server.js`.
 ```
-
-If you want to customize some of the arguments going to the server you can edit the Config arguments at the top of ```run-server```.
-
-You'll see some output as everything is setup, but it will end on the output from a running parse server instance!
-Again, stopping the server will proceed to shutdown the mongodb instance running as well.
-
-For more detailed logging uncomment the ```--verbose``` argument being passed to parse-server in the run-server script. This will give you detailed information about each of your requests, which can be useful for debugging.
+verbose: true
+```
 
 ### Issues.
 If you have any problems running the script or have any suggestions to add new functionality feel free to open an issue or PR.
