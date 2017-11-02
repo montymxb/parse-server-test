@@ -14,15 +14,29 @@ If you don't already have npm installed you can <a href="http://blog.npmjs.org/p
 ### How to Get Started.
 You can clone down this project and run ```npm install``` to set everything up. Npm installations are done locally to keep things nice and tidy.
 
-You can then run ```npm start```. This will run an instance of `forever`, which will monitor the server setup in `server.js`.
-Running via forever detaches the process so you don't have to worry about tying up your terminal session.
+```bash
+# start the server
+npm start
 
-The server will continue to run until a subsequent `npm stop` command is run. This will, via `forever`, shutdown the server and close up the test instance of mongodb.
+...
 
-You can also call ```node server.js``` directly from the project directory to start everything up, in case you want to get direct output directly to the console rather than the logs.
+# stop the server
+npm stop
+```
+
+You can run the server directly from the project directory, in case you want to get direct output directly to the console rather than just the logs.
+Note that if you start up this way you will first want to start up a test db using `mongodb-runner`.
+```bash
+mongodb-runner start
+node server.js
+```
+When you're done you'll want to make sure you shutdown mongodb again.
+```bash
+mongodb-runner stop
+```
 
 If you want to customize your test server you need only edit the configuration in `server.js`, the bit that's passed in to create a new instance of `ParseServer`.
-You can find more details about configuring your parse-server [here]()https://github.com/parse-community/parse-server/#configuration.
+You can find more details about configuring your parse-server [here](https://github.com/parse-community/parse-server/#configuration).
 
 Verbose output is enabled by default to help with testing. If you need to make it a bit quieter you can remove the following line from the config in `server.js`.
 ```
