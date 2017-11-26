@@ -21,7 +21,7 @@ var api = new ParseServer({
   },
 
   emailAdapter: {
-    module: "parse-server-simple-mailgun-adapter",
+    module: "@parse/simple-mailgun-adapter",
     options: {
       apiKey: "not-a-real-api-key",
       domain: "example.com",
