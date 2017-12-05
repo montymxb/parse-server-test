@@ -5,7 +5,7 @@
   "main": "parse-server-test",
   "scripts": {
     "test": "echo \"Error: No Tests Specified\" && exit 1",
-    "prestart": "mongodb-runner start",
+    "prestart": "MONGODB_VERSION=3.4 mongodb-runner start",
     "start": "forever start ./server.js",
     "stop": "forever stop ./server.js",
     "poststop": "mongodb-runner stop"
