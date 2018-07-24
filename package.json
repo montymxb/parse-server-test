@@ -28,8 +28,8 @@
   "homepage": "https://github.com/montymxb/parse-server-test#readme",
   "dependencies": {
     "forever": "^0.15.3",
-    "mongodb-runner": "^3.6.1",
-    "parse-server": "github:parse-community/parse-server#latest",
-    "winston": "^2.4.0"
+    "mongodb-runner": "^4.0.0",
+    "parse-server": "github:parse-community/parse-server#master",
+    "winston": "^2.4.3"
   }
 }
