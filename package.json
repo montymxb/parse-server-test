@@ -1,6 +1,6 @@
 {
   "name": "parse-server-test",
-  "version": "1.3.7",
+  "version": "1.3.8",
   "description": "Testable Parse Server. Lightweight instance for running tests against the Parse PHP SDK and any other parse sdks.",
   "main": "parse-server-test",
   "scripts": {
@@ -27,9 +27,8 @@
   },
   "homepage": "https://github.com/montymxb/parse-server-test#readme",
   "dependencies": {
-    "forever": "^0.15.3",
-    "mongodb-runner": "^4.0.0",
-    "parse-server": "github:parse-community/parse-server#master",
-    "winston": "^2.4.3"
+    "forever": "0.15.3",
+    "mongodb-runner": "4.7.1",
+    "parse-server": "github:parse-community/parse-server#master"
   }
 }
