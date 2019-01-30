@@ -29,6 +29,7 @@
   "dependencies": {
     "forever": "0.15.3",
     "mongodb-runner": "4.7.1",
-    "parse-server": "github:parse-community/parse-server#master"
+    "parse-server": "github:parse-community/parse-server#master",
+    "winston": "2.4.3"
   }
 }
